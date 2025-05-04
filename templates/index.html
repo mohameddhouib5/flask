@@ -1,0 +1,1017 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estimacar - Get Your Car's Market Value Instantly</title>
+  <meta name="description" content="Estimate your car's market value with our AI-powered prediction tool. Get accurate price estimates based on make, model, year, and mileage." />
+  <meta name="author" content="Dhouib's company" />
+
+  <meta property="og:title" content="Estimacar - Get Your Car's Market Value Instantly" />
+  <meta property="og:description" content="Estimate your car's market value with our AI-powered prediction tool. Get accurate price estimates based on make, model, year, and mileage." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="logo.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@estimacar" />
+  <meta name="twitter:image" content="logo.png" />
+  
+  <style>
+    /* CSS Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    /* Variables */
+    :root {
+      --color-blue: #1e40af;
+      --color-blue-dark: #1e3a8a;
+      --color-orange: #f97316;
+      --color-orange-hover: #ea580c;
+      --color-light-gray: #f8fafc;
+      --color-dark-gray: #334155;
+      --color-white: #ffffff;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+      --radius: 0.5rem;
+    }
+    
+    /* Global Styles */
+    body {
+      background-color: var(--color-light-gray);
+      color: var(--color-dark-gray);
+      line-height: 1.6;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    section {
+      padding: 4rem 0;
+    }
+    
+    h1, h2, h3, h4, h5 {
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    button {
+      cursor: pointer;
+      font-family: inherit;
+      border: none;
+      background: none;
+    }
+    
+    /* Header */
+    header {
+      background-color: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    header img {
+      height: 48px;
+    }
+    
+    nav {
+      display: none;
+    }
+    
+    @media (min-width: 768px) {
+      nav {
+        display: flex;
+        gap: 1.5rem;
+      }
+      
+      .mobile-menu-btn {
+        display: none;
+      }
+    }
+    
+    nav a {
+      color: var(--color-dark-gray);
+    }
+    
+    nav a:hover {
+      color: var(--color-orange);
+    }
+    
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    
+    .btn-outline {
+      border: 1px solid var(--color-orange);
+      color: var(--color-orange);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--color-orange);
+      color: var(--color-white);
+    }
+    
+    .btn-primary {
+      background-color: var(--color-orange);
+      color: var(--color-white);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--color-orange-hover);
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to bottom right, var(--color-blue), #2563eb);
+      color: var(--color-white);
+      padding: 4rem 0 6rem;
+      position: relative;
+  display: flex;                  /* Enable flexbox */
+  justify-content: center;       /* Center horizontally */
+  align-items: center;           /* Center vertically */
+  text-align: center;            /* Center text inside */
+  flex-direction: column;        /* Stack children vertically */
+	   
+    }
+
+.hero .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+    
+    .hero-content {
+      max-width: 750px;
+      margin-bottom: 2rem;
+	    align-items: center;
+	
+    }
+    
+    .hero h1 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+    }
+    
+    .hero p {
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    
+    .hero-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+	    align-items: center;
+    }
+    
+    @media (min-width: 640px) {
+      .hero-btns {
+        flex-direction: row;
+      }
+      
+      .hero h1 {
+        font-size: 3rem;
+      }
+    }
+    
+    .btn-hero {
+      padding: 0.75rem 2rem;
+      font-size: 1.125rem;
+    }
+    
+    .btn-hero-outline {
+      border: 1px solid white;
+      color: white;
+    }
+    
+    .btn-hero-outline:hover {
+      background-color: white;
+      color: var(--color-blue);
+    }
+    
+    /* Car Form */
+    .form-section {
+      background-color: var(--color-light-gray);
+      padding: 4rem 0;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .section-header h2 {
+      color: var(--color-blue);
+      font-size: 1.875rem;
+      margin-bottom: 1rem;
+    }
+    
+    .section-header p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--color-dark-gray);
+    }
+    
+    .form-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    @media (min-width: 768px) {
+      .form-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .card {
+      background-color: var(--color-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+    
+    .card-content {
+      padding: 1.5rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-dark-gray);
+      margin-bottom: 0.25rem;
+    }
+    
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #cbd5e0;
+      border-radius: var(--radius);
+      font-size: 1rem;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    
+    .slider-container {
+      margin-bottom: 2rem;
+    }
+    
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .slider {
+      width: 100%;
+    }
+    
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+    
+    .results-placeholder {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .results-content {
+      text-align: center;
+    }
+    
+    .results-circle {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      background-color: rgba(30, 64, 175, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .results-circle-inner {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      background-color: rgba(30, 64, 175, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .results-circle-core {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background-color: var(--color-blue);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .results-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--color-blue);
+      margin-bottom: 0.25rem;
+    }
+    
+    .results-details {
+      border-top: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1rem 0;
+      margin: 1rem auto;
+      max-width: 15rem;
+    }
+    
+    .results-detail-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .results-detail-label {
+      font-weight: 500;
+      color: #6b7280;
+    }
+    
+    /* How It Works */
+    .how-works {
+      background-color: var(--color-white);
+      padding: 4rem 0;
+    }
+    
+    .steps-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto 4rem;
+    }
+    
+    @media (min-width: 768px) {
+      .steps-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    .step-card {
+      position: relative;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    
+    .step-card .emoji {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .step-card h3 {
+      color: var(--color-blue);
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+    }
+    
+    @media (min-width: 768px) {
+      .step-card:not(:last-child):after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -1rem;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-top: 0.5rem solid transparent;
+        border-bottom: 0.5rem solid transparent;
+        border-left: 0.5rem solid #cbd5e0;
+      }
+    }
+    
+    .info-box {
+      background-color: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+    
+    .info-box h3 {
+      color: var(--color-blue);
+      margin-bottom: 1rem;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem 2rem;
+      margin-top: 1rem;
+    }
+    
+    @media (min-width: 768px) {
+      .features-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      color: #374151;
+    }
+    
+    .checkmark {
+      color: #3b82f6;
+      margin-right: 0.5rem;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--color-blue);
+      color: var(--color-white);
+      padding: 3rem 0 1.5rem;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+    
+    .footer-branding h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-branding p {
+      color: #bfdbfe;
+      margin-bottom: 1.5rem;
+      max-width: 25rem;
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .social-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: var(--color-white);
+    }
+    
+    .footer-links h3 {
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-links a {
+      color: #bfdbfe;
+    }
+    
+    .footer-links a:hover {
+      color: var(--color-white);
+    }
+    
+    .contact-item {
+      display: flex;
+      margin-bottom: 0.75rem;
+    }
+    
+    .contact-item svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-right: 0.5rem;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      color: #94a3b8;
+      font-size: 0.875rem;
+    }
+    
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+      }
+    }
+    
+    .footer-bottom a {
+      color: #94a3b8;
+    }
+    
+    .footer-bottom a:hover {
+      color: var(--color-white);
+    }
+    
+    .footer-links-bottom {
+      display: flex;
+      gap: 1.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">
+    <div style="display: flex; align-items: center; gap: 20px;">
+  <img src="{{ url_for('static', filename='logo.png') }}" style="height: 120px;" alt="Estimacar Logo">
+  <h1 style="
+    margin: 0;
+    font-size: 1em;
+    color: #34495e;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  ">
+ Smart Valuations for Smarter Deals.
+  </h1>
+</div>
+
+      </div>
+      <nav>
+        <a href="#how-works" class="btn btn-outline">How It Works</a>
+        <a href="about.html" class="btn btn-outline">About</a>
+       
+      </nav>
+      <button class="mobile-menu-btn">Menu</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Discover Your Car's True Market Value</h1>
+          <p>Get an accurate price estimate based on your vehicle's details using our advanced machine learning model.</p>
+        
+		  <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
+            <a href="#car-form" class="btn btn-primary btn-hero">Estimate My Car's Value</a>
+            <a href="#how-works" class="btn btn-hero-outline">How It Works</a>
+			</div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Car Form -->
+    <section id="car-form" class="form-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Estimate Your Car's Value</h2>
+          <p>Fill in your vehicle's details below and our machine learning model will provide an estimated market value based on current data.</p>
+        </div>
+        
+        <div class="form-container">
+          <div class="card">
+            <div class="card-content">
+              <form id="valuation-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="brand">Brand*</label>
+                    <select class="form-select" id="brand" required>
+                      <option value="">Select brand</option>
+                      <option value="Toyota">Toyota</option>
+                      <option value="Honda">Honda</option>
+                      <option value="Ford">Ford</option>
+                      <option value="Chevrolet">Chevrolet</option>
+                      <option value="BMW">BMW</option>
+                      <option value="Mercedes-Benz">Mercedes-Benz</option>
+                      <option value="Audi">Audi</option>
+                      <option value="Volkswagen">Volkswagen</option>
+                      <option value="Nissan">Nissan</option>
+                      <option value="Hyundai">Hyundai</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="model">Model*</label>
+                    <input class="form-input" type="text" id="model" placeholder="e.g., Civic, Corolla" required>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="year">Year*</label>
+                    <select class="form-select" id="year" required>
+                      <option value="">Select year</option>
+                      <script>
+                        const currentYear = new Date().getFullYear();
+                        for (let i = 0; i < 25; i++) {
+                          document.write(`<option value="${currentYear - i}">${currentYear - i}</option>`);
+                        }
+                      </script>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="condition">Condition</label>
+                    <select class="form-select" id="condition">
+                      <option value="Excellent">Excellent</option>
+                      <option value="Good" selected>Good</option>
+                      <option value="Fair">Fair</option>
+                      <option value="Poor">Poor</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="slider-container">
+                  <div class="slider-header">
+                    <label class="form-label" for="mileage">Mileage (miles)</label>
+                    <span id="mileage-value">50,000</span>
+                  </div>
+                  <input type="range" class="slider" id="mileage" min="0" max="200000" step="1000" value="50000">
+                  <div class="slider-labels">
+                    <span>0</span>
+                    <span>100,000</span>
+                    <span>200,000</span>
+                  </div>
+                </div>
+
+                <div class="slider-container">
+                  <div class="slider-header">
+                    <label class="form-label" for="engineSize">Engine Size (L)</label>
+                    <span id="engine-size-value">2.0L</span>
+                  </div>
+                  <input type="range" class="slider" id="engineSize" min="1.0" max="6.0" step="0.1" value="2.0">
+                  <div class="slider-labels">
+                    <span>1.0L</span>
+                    <span>3.5L</span>
+                    <span>6.0L</span>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width:100%; padding: 0.75rem; font-size: 1.125rem; background-color: var(--color-blue);">
+                  Get Estimated Value
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="card" id="results-card">
+            <div class="card-content results-placeholder" id="results-placeholder">
+              <div class="results-circle">
+                <div class="results-circle-inner">
+                  <div class="results-circle-core">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                      <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <h3>Your Valuation Results</h3>
+              <p style="color: #6b7280; margin-top: 0.5rem;">
+                Fill out the form with your car details, and your estimated vehicle value will appear here.
+              </p>
+            </div>
+            
+            <div class="card-content results-content" id="results-content" style="display: none;">
+              <h3 style="color: #6b7280; font-size: 1.25rem;">Estimated Value</h3>
+              <div class="results-value" id="estimated-value">$15,245</div>
+              <p style="color: #6b7280; font-size: 0.875rem;">Based on current market data</p>
+              
+              <div class="results-details">
+                <div class="results-detail-row">
+                  <div class="results-detail-label">Vehicle:</div>
+                  <div id="vehicle-summary">2019 Toyota Corolla</div>
+                </div>
+                <div class="results-detail-row">
+                  <div class="results-detail-label">Mileage:</div>
+                  <div id="mileage-summary">50,000 miles</div>
+                </div>
+                <div class="results-detail-row">
+                  <div class="results-detail-label">Engine:</div>
+                  <div id="engine-summary">2.0L</div>
+                </div>
+                <div class="results-detail-row">
+                  <div class="results-detail-label">Condition:</div>
+                  <div id="condition-summary">Good</div>
+                </div>
+              </div>
+              
+              <div style="display: grid; gap: 0.75rem;">
+                <button class="btn btn-outline" style="width: 100%;">Download Report</button>
+                <button id="reset-form" class="btn" style="width: 100%; background-color: #e5e7eb; color: #4b5563;">
+                  Make Another Estimate
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-works" class="how-works">
+      <div class="container">
+        <div class="section-header">
+          <h2>How It Works</h2>
+          <p>Our car valuation tool uses advanced machine learning algorithms to provide accurate price estimates based on market data.</p>
+        </div>
+
+        <div class="steps-container">
+          <div class="step-card card">
+            <div class="emoji">📋</div>
+            <h3>Enter Details</h3>
+            <p>Provide information about your vehicle including make, model, year, mileage, and condition.</p>
+          </div>
+          
+          <div class="step-card card">
+            <div class="emoji">🧠</div>
+            <h3>AI Analysis</h3>
+            <p>Our machine learning model analyzes your car's details against millions of data points from the market.</p>
+          </div>
+          
+          <div class="step-card card">
+            <div class="emoji">💰</div>
+            <h3>Get Valuation</h3>
+            <p>Receive an accurate estimate of your car's current market value based on real-time data.</p>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <h3>About Our Prediction Model</h3>
+          <p>Our car valuation tool uses a sophisticated machine learning model trained on millions of car sales records. It analyzes various factors including:</p>
+          
+          <div class="features-grid">
+            <div class="feature-item">
+              <span class="checkmark">✓</span>
+              Vehicle age and depreciation rates
+            </div>
+            <div class="feature-item">
+              <span class="checkmark">✓</span>
+              Mileage impact on value
+            </div>
+            <div class="feature-item">
+              <span class="checkmark">✓</span>
+              Brand and model popularity
+            </div>
+            <div class="feature-item">
+              <span class="checkmark">✓</span>
+              Market demand fluctuations
+            </div>
+            <div class="feature-item">
+              <span class="checkmark">✓</span>
+              Regional pricing differences
+            </div>
+            <div class="feature-item">
+              <span class="checkmark">✓</span>
+              Seasonal value variations
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-branding">
+          <h2>Estimacar</h2>
+          <p>Get accurate market values for your vehicle using our advanced machine learning prediction model.</p>
+          <div class="social-icons">
+            <a href="#">
+              <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+              </svg>
+            </a>
+            <a href="#">
+              <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
+              </svg>
+            </a>
+            <a href="#">
+              <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#how-works">How It Works</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Contact</h3>
+          <div class="contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span> FSEG SFAX</span>
+          </div>
+          <div class="contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span>mohameddhouib741@gmail.com</span>
+          </div>
+          <div class="contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <span>(+216) 26311044</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Estimacar. All rights reserved.</p>
+        <div class="footer-links-bottom">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    // Form handling logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('valuation-form');
+      const mileageInput = document.getElementById('mileage');
+      const mileageValue = document.getElementById('mileage-value');
+      const engineInput = document.getElementById('engineSize');
+      const engineValue = document.getElementById('engine-size-value');
+      const resultsPlaceholder = document.getElementById('results-placeholder');
+      const resultsContent = document.getElementById('results-content');
+      const resetButton = document.getElementById('reset-form');
+      
+      // Update sliders display values
+      mileageInput.addEventListener('input', function() {
+        mileageValue.textContent = Number(this.value).toLocaleString();
+      });
+      
+      engineInput.addEventListener('input', function() {
+        engineValue.textContent = this.value + 'L';
+      });
+      
+      // Form submission
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const brand = document.getElementById('brand').value;
+        const model = document.getElementById('model').value;
+        const year = document.getElementById('year').value;
+        const mileage = parseInt(document.getElementById('mileage').value);
+        const engineSize = parseFloat(document.getElementById('engineSize').value);
+        const condition = document.getElementById('condition').value;
+        
+        // Validation
+        if (!brand || !model || !year) {
+          alert('Please fill all required fields');
+          return;
+        }
+        
+        // Simple calculation for demo purposes
+        let baseValue = 20000;
+        const currentYear = new Date().getFullYear();
+        const ageDeduction = (currentYear - year) * 1500;
+        const mileageDeduction = mileage * 0.05;
+        const premiumBrands = ["BMW", "Mercedes-Benz", "Audi"];
+        const brandMultiplier = premiumBrands.includes(brand) ? 1.5 : 1.0;
+        const conditionMultipliers = {
+          "Excellent": 1.2,
+          "Good": 1.0,
+          "Fair": 0.8,
+          "Poor": 0.6
+        };
+        
+        // Calculate final value
+        let predictedValue = (baseValue - ageDeduction - mileageDeduction) * brandMultiplier * conditionMultipliers[condition];
+        predictedValue = Math.max(predictedValue, 500);
+        
+        // Update results
+        document.getElementById('estimated-value').textContent = '$' + Math.round(predictedValue).toLocaleString();
+        document.getElementById('vehicle-summary').textContent = year + ' ' + brand + ' ' + model;
+        document.getElementById('mileage-summary').textContent = mileage.toLocaleString() + ' miles';
+        document.getElementById('engine-summary').textContent = engineSize.toFixed(1) + 'L';
+        document.getElementById('condition-summary').textContent = condition;
+        
+        // Show results
+        resultsPlaceholder.style.display = 'none';
+        resultsContent.style.display = 'block';
+      });
+      
+      // Reset form
+      resetButton.addEventListener('click', function() {
+        form.reset();
+        mileageInput.value = 50000;
+        mileageValue.textContent = '50,000';
+        engineInput.value = 2.0;
+        engineValue.textContent = '2.0L';
+        resultsContent.style.display = 'none';
+        resultsPlaceholder.style.display = 'flex';
+      });
+      
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          if (this.getAttribute('href').length > 1) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
+  
+  <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+  
+</body>
+</html>
